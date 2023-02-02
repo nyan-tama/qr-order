@@ -11,6 +11,19 @@ export default function Template({ children }) {
                 .init({ liffId: process.env.NEXT_PUBLIC_LIFF_ID })
                 .then(() => {
                     console.log("liff.init() done");
+                    const accessToken = liff.getAccessToken();
+                    // functionsへの渡し方を考える
+                    // postによるapiでの方法
+                    // children内のpage内にあるclienntbuttonからtemplate内の値が読めるのであれば可能
+                    if (accessToken) {
+                        axios.post('/api/hello', {
+                            accessToken,
+                        }).then(function (response) {
+                            console.log(response);
+                        }).catch(function (error) {
+                            console.log(error);
+                        });
+                    }
                 })
                 .catch((error) => {
                     console.log(`liff.init() failed: ${error}`);
