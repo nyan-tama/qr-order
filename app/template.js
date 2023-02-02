@@ -16,6 +16,7 @@ export default function Template({ children }) {
                     // postによるapiでの方法
                     // children内のpage内にあるclienntbuttonからtemplate内の値が読めるのであれば可能
                     if (accessToken) {
+                        console.log("pass?")
                         axios.post('/api/hello', {
                             accessToken,
                         }).then(function (response) {
